@@ -1,7 +1,6 @@
 version: '3.3'
 services:
   localstack:
-    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_cloud}"
     image: localstack/localstack
     network_mode: bridge
     ports:
@@ -16,7 +15,7 @@ services:
       - SERVICES=dynamodb,sqs
     volumes:
       - "./config/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
-      - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
 
   mysql-product:
@@ -31,6 +30,23 @@ services:
       - '3306:3306'
     expose:
       - '3306'
+    networks:
+      - bridge
+  
+  mysql-order:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'order'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    networks:
+      - bridge
 
   ms-product:
     build: ./tech-challenge-ms-product
@@ -38,10 +54,37 @@ services:
       localstack:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql:3306/burger'
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-product:3306/product'
       SPRING_DATASOURCE_USERNAME: 'user'
       SPRING_DATASOURCE_PASSWORD: 'password'
     ports:
       - '8080:8080'
     expose:
       - '8080'
+    networks:
+      - bridge
+  
+  ms-order:
+    build: ./tech-challenge-ms-order
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-order:3306/order'
+      SPRING_DATASOURCE_USERNAME: 'user'
+      SPRING_DATASOURCE_PASSWORD: 'password'
+      # LOCALSTACK_URL: http://localstack:4566
+      # AWS_ACCESS_KEY_ID: fiap
+      # AWS_SECRET_ACCESS_KEY: fiap
+      # AWS_ENDPOINT: http://localstack:4566
+      # API_PRODUCT_HOST: http://ms-product:8080
+      # API_CUSTOMER_HOST: http://ms-customer:8080
+    ports:
+      - '8081:8080'
+    expose:
+      - '8081'
+    networks:
+      - bridge
+networks:
+  bridge:
+  tech-challenge:

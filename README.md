@@ -29,8 +29,8 @@ docker-compose up --build
 ```
 
 #### Endpoints locais
-ms-product: [http://localhost:8080/swagger](http://localhost:8080/swagger)
-ms-order: [http://localhost:8081/swagger](http://localhost:8081/swagger)
-ms-payment: [http://localhost:8082/swagger](http://localhost:8082/swagger)
-ms-customer: [http://localhost:8083/swagger](http://localhost:8083/swagger)
-ms-notification: [http://localhost:8084/swagger](http://localhost:8084/swagger)
+* ms-product: [http://localhost:8080/swagger](http://localhost:8080/swagger)
+* ms-order: [http://localhost:8081/swagger](http://localhost:8081/swagger)
+* ms-payment: [http://localhost:8082/swagger](http://localhost:8082/swagger)
+* ms-customer: [http://localhost:8083/swagger](http://localhost:8083/swagger)
+* ms-notification: [http://localhost:8084/swagger](http://localhost:8084/swagger)
