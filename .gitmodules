@@ -1,0 +1,3 @@
+[submodule "tech-challenge-ms-product"]
+	path = tech-challenge-ms-product
+	url = git@github.com:souzamarcos/tech-challenge-ms-product.git
