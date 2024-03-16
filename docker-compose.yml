@@ -1,8 +1,7 @@
 version: '3.3'
 services:
   localstack:
-    image: localstack/localstack
-    network_mode: bridge
+    image: localstack/localstack:3.2
     ports:
       - "127.0.0.1:4510-4530:4510-4530"
       - "127.0.0.1:4566:4566"
@@ -13,10 +12,13 @@ services:
       - AWS_SECRET_ACCESS_KEY=fiap
       - DEFAULT_REGION=us-east-1
       - SERVICES=dynamodb,sqs
+      - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "./config/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - localstack
 
   mysql-product:
     image: mysql:8.0
@@ -31,7 +33,7 @@ services:
     expose:
       - '3306'
     networks:
-      - bridge
+      - localstack
   
   mysql-order:
     image: mysql:8.0
@@ -46,7 +48,7 @@ services:
     expose:
       - '3307'
     networks:
-      - bridge
+      - localstack
 
   ms-product:
     build: ./tech-challenge-ms-product
@@ -62,8 +64,8 @@ services:
     expose:
       - '8080'
     networks:
-      - bridge
-  
+      - localstack
+
   ms-order:
     build: ./tech-challenge-ms-order
     depends_on:
@@ -73,18 +75,21 @@ services:
       SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-order:3306/order'
       SPRING_DATASOURCE_USERNAME: 'user'
       SPRING_DATASOURCE_PASSWORD: 'password'
-      # LOCALSTACK_URL: http://localstack:4566
-      # AWS_ACCESS_KEY_ID: fiap
-      # AWS_SECRET_ACCESS_KEY: fiap
+      LOCALSTACK_URL: http://localstack:4566
+      AWS_ACCESS_KEY_ID: fiap
+      AWS_SECRET_ACCESS_KEY: fiap
       # AWS_ENDPOINT: http://localstack:4566
-      # API_PRODUCT_HOST: http://ms-product:8080
-      # API_CUSTOMER_HOST: http://ms-customer:8080
+      API_PRODUCT_HOST: http://ms-product:8080
+      API_CUSTOMER_HOST: http://ms-customer:8080
     ports:
       - '8081:8080'
     expose:
       - '8081'
     networks:
-      - bridge
+      - localstack
+
 networks:
-  bridge:
-  tech-challenge:
+  localstack:
+    external: false
+    driver: bridge
+    name: localstack
