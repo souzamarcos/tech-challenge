@@ -76,9 +76,6 @@ services:
       SPRING_DATASOURCE_USERNAME: 'user'
       SPRING_DATASOURCE_PASSWORD: 'password'
       LOCALSTACK_URL: http://localstack:4566
-      AWS_ACCESS_KEY_ID: fiap
-      AWS_SECRET_ACCESS_KEY: fiap
-      # AWS_ENDPOINT: http://localstack:4566
       API_PRODUCT_HOST: http://ms-product:8080
       API_CUSTOMER_HOST: http://ms-customer:8080
     ports:
@@ -89,7 +86,5 @@ services:
       - localstack
 
 networks:
-  localstack:
-    external: false
-    driver: bridge
-    name: localstack
+  bridge:
+  tech-challenge:
