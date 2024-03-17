@@ -17,8 +17,6 @@ services:
       - "./config/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    networks:
-      - localstack
 
   mysql-product:
     image: mysql:8.0
@@ -32,8 +30,6 @@ services:
       - '3306:3306'
     expose:
       - '3306'
-    networks:
-      - localstack
   
   mysql-order:
     image: mysql:8.0
@@ -47,8 +43,6 @@ services:
       - '3307:3306'
     expose:
       - '3307'
-    networks:
-      - localstack
 
   ms-product:
     build: ./tech-challenge-ms-product
@@ -63,8 +57,6 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-    networks:
-      - localstack
 
   ms-order:
     build: ./tech-challenge-ms-order
@@ -82,9 +74,4 @@ services:
       - '8081:8080'
     expose:
       - '8081'
-    networks:
-      - localstack
 
-networks:
-  bridge:
-  tech-challenge:
