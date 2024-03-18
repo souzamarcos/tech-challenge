@@ -20,7 +20,7 @@ Repositório central para o tech challenge da pós da FIAP
 Para executar todas as aplicações será necessário baixar o código dos repositórios:
 
 ```bash
-git submodule init
+git submodule update --init
 ```
 
 Após isso basta iniciar o docker-compose
