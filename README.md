@@ -35,6 +35,10 @@ git submodule update --init
 docker-compose up --build
 ```
 
+4 - Aguarde alguns minutos para baixar todas as imagens, buildar as aplicações e iniciar os containers. Após isso basta utilizar o endpoints abaixo.
+
+Obs: para criar o token de um cliente localmente siga as instruções em https://drive.google.com/file/d/1elMAUyHxnvPCCEP0zhBC40aX7WcukJST/view?usp=drive_link.
+
 #### Endpoints locais
 * ms-product: [http://localhost:8080/swagger](http://localhost:8080/swagger)
 * ms-order: [http://localhost:8081/swagger](http://localhost:8081/swagger)
