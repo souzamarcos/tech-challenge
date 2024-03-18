@@ -21,8 +21,9 @@ Repositório central para o tech challenge da pós da FIAP
 
 ## Executando aplicações
 
-Para executar todas as aplicações será necessário baixar o código dos repositórios:
+Para executar todas as aplicações será necessário que o Docker esteja rodando na máquina. 
 
+Em seguida será necessário baixar o código dos repositórios:
 ```bash
 git submodule update --init 
 ```
