@@ -114,7 +114,7 @@ services:
       localstack:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-order:3306/payment'
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-payment:3306/payment'
       SPRING_DATASOURCE_USERNAME: 'user'
       SPRING_DATASOURCE_PASSWORD: 'password'
       LOCALSTACK_URL: http://localstack:4566
