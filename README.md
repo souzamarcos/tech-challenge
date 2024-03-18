@@ -23,19 +23,22 @@ Repositório central para o tech challenge da pós da FIAP
 
 Para executar todas as aplicações será necessário que o Docker esteja rodando na máquina. 
 
-1- Baixe esse repositório e dentro da pasta siga as instruções abaixo:
-
-2 - Baixe o código dos repositórios executando o seguinte código:
+1- Antes de clonar o repositório é necessário rodar o comando abaixo para evitar que o Windows formate o arquivo do git incorretamente e adicionando CRLF ao final dos arquivos. Isso pode gerar um problema ao criar recursos iniciais do localstack pois um [script](config/localstack/init-aws.sh) é enviado para o container rodando um linux.
+```bash
+git config --global core.autocrlf false
+```
+2 - Clone o repositório e entre na pasta.
+3 - Execute código dos repositórios executando o seguinte código:
 ```bash
 git submodule update --init 
 ```
 
-3 - Execute as aplicações através do Docker-compose executando o seguinte código:
+4 - Execute as aplicações através do Docker-compose executando o seguinte código:
 ```bash
 docker-compose up --build
 ```
 
-4 - Aguarde alguns minutos para baixar todas as imagens, buildar as aplicações e iniciar os containers. Após isso basta utilizar o endpoints abaixo.
+5 - Aguarde alguns minutos para baixar todas as imagens, buildar as aplicações e iniciar os containers. Após isso basta utilizar o endpoints abaixo.
 
 Obs: para criar o token de um cliente localmente siga as instruções em https://drive.google.com/file/d/1elMAUyHxnvPCCEP0zhBC40aX7WcukJST/view?usp=drive_link.
 
