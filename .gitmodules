@@ -4,3 +4,12 @@
 [submodule "tech-challenge-ms-order"]
 	path = tech-challenge-ms-order
 	url = https://github.com/souzamarcos/tech-challenge-ms-order.git
+[submodule "tech-challenge-ms-payment"]
+	path = tech-challenge-ms-payment
+	url = https://github.com/souzamarcos/tech-challenge-ms-payment.git
+[submodule "tech-challenge-ms-notification"]
+	path = tech-challenge-ms-notification
+	url = https://github.com/souzamarcos/tech-challenge-ms-notification.git
+[submodule "tech-challenge-ms-customer"]
+	path = tech-challenge-ms-customer
+	url = https://github.com/souzamarcos/tech-challenge-ms-customer.git
