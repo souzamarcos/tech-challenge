@@ -53,6 +53,21 @@ services:
       - '3307'
     networks:
       localstack:
+  
+  mysql-payment:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'payment'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3308:3306'
+    expose:
+      - '3308'
+    networks:
+      localstack:
 
   ms-product:
     build: ./tech-challenge-ms-product
@@ -88,6 +103,58 @@ services:
       - '8081:8080'
     expose:
       - '8081'
+    dns:
+      - 10.0.2.20
+    networks:
+      localstack:
+  
+  ms-payment:
+    build: ./tech-challenge-ms-payment
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql-order:3306/payment'
+      SPRING_DATASOURCE_USERNAME: 'user'
+      SPRING_DATASOURCE_PASSWORD: 'password'
+      LOCALSTACK_URL: http://localstack:4566
+      API_ORDER_HOST: http://ms-order:8080
+    ports:
+      - '8082:8080'
+    expose:
+      - '8082'
+    dns:
+      - 10.0.2.20
+    networks:
+      localstack:
+
+  ms-customer:
+    build: ./tech-challenge-ms-customer
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      LOCALSTACK_URL: http://localstack:4566
+    ports:
+      - '8083:8080'
+    expose:
+      - '8083'
+    dns:
+      - 10.0.2.20
+    networks:
+      localstack:
+  
+  ms-notification:
+    build: ./tech-challenge-ms-notification
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      LOCALSTACK_URL: http://localstack:4566
+    ports:
+      - '8084:8080'
+    expose:
+      - '8084'
     dns:
       - 10.0.2.20
     networks:
