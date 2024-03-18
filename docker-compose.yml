@@ -7,6 +7,7 @@ services:
       - "127.0.0.1:4566:4566"
       - "127.0.0.1:4571:4571"
     environment:
+      - DNS_RESOLVE_IP=10.0.2.20
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=fiap
       - AWS_SECRET_ACCESS_KEY=fiap
@@ -17,6 +18,10 @@ services:
       - "./config/localstack/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh"
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      localstack:
+        ipv4_address: 10.0.2.20
+    
 
   mysql-product:
     image: mysql:8.0
@@ -30,6 +35,9 @@ services:
       - '3306:3306'
     expose:
       - '3306'
+    
+    networks:
+      localstack:
   
   mysql-order:
     image: mysql:8.0
@@ -43,6 +51,8 @@ services:
       - '3307:3306'
     expose:
       - '3307'
+    networks:
+      localstack:
 
   ms-product:
     build: ./tech-challenge-ms-product
@@ -57,6 +67,10 @@ services:
       - '8080:8080'
     expose:
       - '8080'
+    dns:
+      - 10.0.2.20
+    networks:
+      localstack:
 
   ms-order:
     build: ./tech-challenge-ms-order
@@ -74,4 +88,15 @@ services:
       - '8081:8080'
     expose:
       - '8081'
+    dns:
+      - 10.0.2.20
+    networks:
+      localstack:
+
+networks:
+  localstack:
+    name: localstack
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24
 
