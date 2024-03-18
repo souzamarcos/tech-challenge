@@ -23,6 +23,11 @@ Para executar todas as aplicações será necessário baixar o código dos repos
 git submodule update --init 
 ```
 
+Caso deseje atualizar os arquivos dos submódulos basta executar o comando:
+```bash
+git pull --recurse-submodules
+```
+
 Após isso basta iniciar o docker-compose
 ```bash
 docker-compose up --build
