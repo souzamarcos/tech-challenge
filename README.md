@@ -22,19 +22,15 @@ Repositório central para o tech challenge da pós da FIAP
 ## Executando aplicações
 
 Para executar todas as aplicações será necessário que o Docker esteja rodando na máquina. 
-Baixe esse repositório e dentro da pasta siga as instruções abaixo:
 
-Baixe o código dos repositórios:
+1- Baixe esse repositório e dentro da pasta siga as instruções abaixo:
+
+2 - Baixe o código dos repositórios executando o seguinte código:
 ```bash
 git submodule update --init 
 ```
 
-Caso deseje atualizar os arquivos dos submódulos basta executar o comando:
-```bash
-git pull --recurse-submodules
-```
-
-Após isso basta iniciar o docker-compose
+3 - Execute as aplicações através do Docker-compose executando o seguinte código:
 ```bash
 docker-compose up --build
 ```
