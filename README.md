@@ -28,6 +28,7 @@ Para executar todas as aplicações será necessário que o Docker esteja rodand
 git config --global core.autocrlf false
 ```
 2 - Clone o repositório e entre na pasta.
+
 3 - Execute código dos repositórios executando o seguinte código:
 ```bash
 git submodule update --init 
