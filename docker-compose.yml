@@ -151,6 +151,7 @@ services:
         condition: service_healthy
     environment:
       LOCALSTACK_URL: http://localstack:4566
+      API_CUSTOMER_HOST: http://ms-customer:8080
     ports:
       - '8084:8080'
     expose:
