@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 awslocal dynamodb --region us-east-1 create-table \
    --table-name tf-customers-table \
    --attribute-definitions AttributeName=id,AttributeType=S \
