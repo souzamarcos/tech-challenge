@@ -1,6 +1,6 @@
 [submodule "tech-challenge-ms-product"]
 	path = tech-challenge-ms-product
-	url = git@github.com:souzamarcos/tech-challenge-ms-product.git
+	url = https://github.com/souzamarcos/tech-challenge-ms-product.git
 [submodule "tech-challenge-ms-order"]
 	path = tech-challenge-ms-order
-	url = git@github.com:souzamarcos/tech-challenge-ms-order.git
+	url = https://github.com/souzamarcos/tech-challenge-ms-order.git
