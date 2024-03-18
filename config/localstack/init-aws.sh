@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-set -euo pipefail
+#!/bin/bash
 
 awslocal dynamodb --region us-east-1 create-table \
    --table-name tf-customers-table \
